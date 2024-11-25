@@ -8,6 +8,7 @@ const SyncUser = async () => {
 
   const client = await clerkClient();
   const user = await client.users.getUser(userId);
+  
   const userEmail = user.emailAddresses[0]?.emailAddress;
   if (!userEmail) return notFound();
 

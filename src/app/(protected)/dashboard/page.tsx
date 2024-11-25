@@ -1,12 +1,13 @@
 "use client";
 
 import useProject from "@/hooks/use-project";
-import { useUser } from "@clerk/nextjs";
 import { ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
+import CommitLog from "./_components/commit.log";
 
 const DashboardPage = () => {
   const { project } = useProject();
+
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-y-4">
@@ -27,6 +28,14 @@ const DashboardPage = () => {
         </div>
       </div>
       <h1>{project?.name}</h1>
+      {project?.id}
+      <div className="mt-4 grid grid-cols-1 gap-1 sm:grid-cols-5">
+        AskQuestionsCard MeetingCard
+      </div>
+
+      <div className="mt-8">
+        <CommitLog />
+      </div>
     </div>
   );
 };

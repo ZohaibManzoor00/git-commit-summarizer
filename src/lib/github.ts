@@ -5,8 +5,6 @@ import { aiSummarizeCommit } from "./gemeni";
 
 export const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
-const githubUrl = "https://github.com/docker/genai-stack";
-
 type Response = {
   commitHash: string;
   commitMessage: string;
@@ -15,9 +13,7 @@ type Response = {
   commitDate: string;
 };
 
-export const getCommitHashes = async (
-  githubUrl: string,
-): Promise<Response[]> => {
+export const getCommitHashes = async (githubUrl: string): Promise<Response[]> => {
   const [owner, repo] = githubUrl.split('/').slice(-2)
   if (!owner || !repo) throw new Error("Invalid github url")
 
@@ -47,7 +43,6 @@ export const pollCommits = async (projectId: string) => {
   const summaries = summaryResponses.map(res => res.status === 'fulfilled' ? res.value as string : "")
   const commits = await db.commit.createMany({
     data: summaries.map((summary, i) => {
-        console.log('processing', i + 1)
         return {
             projectId,
             commitHash: unprocessedCommits[i]!.commitHash,
@@ -68,7 +63,6 @@ async function summarizeCommit (githubUrl: string, commitHash: string) {
     const { data: commitDiff } = await axios.get(`${githubUrl}/commit/${commitHash}.diff`, {
         headers: { Accept: 'application/vnd.github.v3.diff' }
     })
-
     return await aiSummarizeCommit(commitDiff)
 }
 
