@@ -12,7 +12,7 @@ interface CommitLogProps {}
 const CommitLog: FC<CommitLogProps> = ({}) => {
   const { projectId, project } = useProject();
   const { data: commits } = api.project.getCommits.useQuery({ projectId });
-  console.log(commits)
+
   return (
     <ul className="h-[calc(100vh-10.6rem)] space-y-2 overflow-y-scroll">
       {commits?.map((c, i) => (
@@ -52,12 +52,13 @@ const CommitLog: FC<CommitLogProps> = ({}) => {
 
               <span className="font-semibold">{c.commitMessage}</span>
               <pre className="mt-2 whitespace-pre-wrap text-sm leading-6 text-gray-600">
-                {c.summary}
+                {c.summary.trim()}
               </pre>
             </div>
           </>
         </li>
       ))}
+      <div className="h-1"/>
     </ul>
   );
 };

@@ -12,7 +12,7 @@ const SidebarLayout: FC<Props> = ({ children }) => {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main className="m-2 w-full">
+      <main className="w-full pt-2">
         <header className="flex h-14 items-center justify-between gap-2 rounded-md border border-sidebar-border bg-sidebar p-2 px-4 shadow">
           <input
             type="search"

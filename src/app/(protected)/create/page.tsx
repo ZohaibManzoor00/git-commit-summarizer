@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import useRefetch from "@/hooks/use-refetch";
 import { api } from "@/trpc/react";
+import { GithubIcon } from "lucide-react";
 import Image from "next/image";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
@@ -44,7 +45,8 @@ const CreatePage: FC<CreatePageProps> = ({}) => {
 
   return (
     <div className="flex h-full items-center justify-center gap-12">
-      <Image src={"/"} alt="undraw-image" height={50} width={50} />
+      <GithubIcon size="100"/>
+      {/* <Image src={"/"} alt="undraw-image" height={50} width={50} /> */}
       <div>
         <div>
           <h1 className="text-2xl font-semibold">
