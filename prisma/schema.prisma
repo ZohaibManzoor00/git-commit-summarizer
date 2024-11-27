@@ -2,13 +2,15 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+    provider        = "prisma-client-js"
+    previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-    provider  = "postgresql"
-    url       = env("DATABASE_URL")
-    directUrl = env("DIRECT_URL")
+    provider   = "postgresql"
+    url        = env("DATABASE_URL")
+    directUrl  = env("DIRECT_URL")
+    extensions = [vector]
 }
 
 model User {
@@ -35,8 +37,9 @@ model Project {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    userToProjects UserToProject[]
-    commits        Commit[]
+    userToProjects       UserToProject[]
+    commits              Commit[]
+    sourceCodeEmbeddings SourceCodeEmbedding[]
 }
 
 model UserToProject {
@@ -68,6 +71,17 @@ model Commit {
     commitAuthorAvatar String
     commitDate         DateTime
     summary            String
-    
-    Project            Project  @relation(fields: [projectId], references: [id])
+
+    Project Project @relation(fields: [projectId], references: [id])
+}
+
+model SourceCodeEmbedding {
+    id               String                     @id @default(cuid())
+    summaryEmbedding Unsupported("vector(768)")?
+
+    sourceCode String
+    fileName   String
+    summary    String
+    projectId  String
+    project    Project @relation(fields: [projectId], references: [id])
 }

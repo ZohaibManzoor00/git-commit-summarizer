@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { Document } from "@langchain/core/documents";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -39,6 +40,34 @@ export const aiSummarizeCommit = async (commitDiff: string) => {
 
     Please summarize the following diff file: \n\n${commitDiff}`,
   ]);
+  
+  return res.response.text();
+};
 
-  return res.response.text()
+export const summarizeCode = async (doc: Document) => {
+  try {
+    const code = doc.pageContent.slice(0, 5000);
+    const aiResponse = await model.generateContent([
+      `You are an intelligent senior software engineer who specializes in onboarding junior software engineers and an expert at understanding code. 
+     You are onboarding a junior software engineer and explaining to them the purpose of the ${doc.metadata.source}.
+     Here is the code:
+     ---
+     ${code}
+     ---
+     Give a summary no more than 100 words of the code above.
+     `,
+    ]);
+
+    return aiResponse.response.text();
+  } catch (err) {
+    console.error(`[ERROR] SUMMARIZING CODE for ${doc.metadata} - ${err}`)
+    return ""
+  }
+};
+
+export const generateEmbedding = async (aiSummary: string) => {
+  const model = genAI.getGenerativeModel({ model: "text-embedding-004" });
+  const embeddingRes = await model.embedContent(aiSummary);
+  const embedding = embeddingRes.embedding;
+  return embedding.values;
 };

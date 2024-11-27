@@ -18,8 +18,7 @@ const DashboardPage = () => {
               This project is linked to{" "}
               <Link
                 href={project?.githubUrl ?? ""}
-                className="inline-flex items-center text-white/80 hover:underline"
-              >
+                className="inline-flex items-center text-white/80 hover:underline">
                 {project?.githubUrl}
                 <ExternalLink className="ml-1 size-4" />
               </Link>
@@ -29,13 +28,9 @@ const DashboardPage = () => {
       </div>
       <h1>{project?.name}</h1>
       {project?.id}
-      <div className="mt-4 grid grid-cols-1 gap-1 sm:grid-cols-5">
-        AskQuestionsCard MeetingCard
-      </div>
-
-      <div className="mt-8">
-        <CommitLog />
-      </div>
+      <div className="mt-4 grid grid-cols-1 gap-1 sm:grid-cols-5">AskQuestionsCard MeetingCard</div>
+      <div className="mt-8" />
+      <CommitLog />
     </div>
   );
 };

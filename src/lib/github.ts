@@ -63,6 +63,7 @@ async function summarizeCommit (githubUrl: string, commitHash: string) {
     const { data: commitDiff } = await axios.get(`${githubUrl}/commit/${commitHash}.diff`, {
         headers: { Accept: 'application/vnd.github.v3.diff' }
     })
+
     return await aiSummarizeCommit(commitDiff)
 }
 
@@ -72,22 +73,15 @@ async function fetchProjectGithubUrl(projectId: string) {
     select: { githubUrl: true },
   });
 
-  if (!project?.githubUrl) throw new Error("Project has not github url");
+  if (!project?.githubUrl) throw new Error("Project has no github url");
 
   return { project, githubUrl: project?.githubUrl };
 }
 
-async function filterUnprocessedCommits(
-  projectId: string,
-  commitHashes: Response[],
-) {
+async function filterUnprocessedCommits(projectId: string, commitHashes: Response[]) {
   const processedCommits = await db.commit.findMany({ where: { projectId } });
-  const unprocessedCommits = commitHashes.filter(
-    (commit) =>
-      !processedCommits.some(
-        (processedCommit) => processedCommit.commitHash === commit.commitHash,
-      ),
-  );
+  const unprocessedCommits = commitHashes.filter((commit) => 
+    !processedCommits.some((processedCommit) => processedCommit.commitHash === commit.commitHash));
 
   return unprocessedCommits
 }

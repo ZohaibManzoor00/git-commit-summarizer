@@ -68,7 +68,7 @@ const CreatePage: FC<CreatePageProps> = ({}) => {
                 type="url"
               />
               <Input
-                placeholder="Github Token (Optional)"
+                placeholder="Github Token (optional, for private repos)"
                 {...register("githubToken")}
               />
               <div className="h-1" />
