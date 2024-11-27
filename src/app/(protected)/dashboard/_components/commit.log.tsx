@@ -1,10 +1,12 @@
 "use client";
+
 import useProject from "@/hooks/use-project";
 import { cn } from "@/lib/utils";
 import { api } from "@/trpc/react";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { FC } from "react";
 
 interface CommitLogProps {}
@@ -13,17 +15,28 @@ const CommitLog: FC<CommitLogProps> = ({}) => {
   const { projectId, project } = useProject();
   const { data: commits } = api.project.getCommits.useQuery({ projectId });
 
+  const searchParams = useSearchParams();
+  const search = searchParams.get("query") ?? "";
+  const query = search.toLowerCase()
+
+  const filteredCommits = query
+    ? commits?.filter((c) => {
+        return c.commitMessage.toLowerCase().includes(query) ||
+        c.summary.toLowerCase().includes(query);
+      })
+    : commits;
+
   return (
     <ul className="h-[calc(100vh-10.6rem)] space-y-2 overflow-y-scroll">
-      {commits?.map((c, i) => (
+      {filteredCommits?.map((c, i) => (
         <li key={c.id} className="relative flex gap-x-4 pl-2 pr-2">
           <div
             className={cn(
-              i === commits.length - 1 ? "h-6" : "-bottom-6",
+              i === filteredCommits.length - 1 ? "h-6" : "-bottom-6",
               "absolute left-0 top-0 flex w-6 justify-center",
             )}
           >
-            <div className="w-px translate-x-1 bg-gray-200 ml-4" />
+            <div className="ml-4 w-px translate-x-1 bg-gray-200" />
           </div>
           <>
             <Image
@@ -58,7 +71,7 @@ const CommitLog: FC<CommitLogProps> = ({}) => {
           </>
         </li>
       ))}
-      <div className="h-1"/>
+      <div className="h-1" />
     </ul>
   );
 };
