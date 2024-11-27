@@ -15,7 +15,7 @@ const SidebarLayout: FC<Props> = ({ children }) => {
         <div className="flex items-center gap-2 rounded-md border border-sidebar-border bg-sidebar p-2 shadow">
           {/* Search */}
           <div className="ml-auto"></div>
-          <UserButton />
+          {/* <UserButton /> */}
         </div>
         <div className="h-4"></div>
         {/* main content */}
