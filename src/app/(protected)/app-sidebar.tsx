@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/sidebar";
 import useProject from "@/hooks/use-project";
 import { cn } from "@/lib/utils";
+import { UserButton } from "@clerk/nextjs";
 import {
   Bot,
   CreditCard,

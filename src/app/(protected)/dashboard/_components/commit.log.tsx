@@ -14,16 +14,16 @@ const CommitLog: FC<CommitLogProps> = ({}) => {
   const { data: commits } = api.project.getCommits.useQuery({ projectId });
 
   return (
-    <ul className="space-y-2">
+    <ul className="h-[calc(100vh-10.6rem)] space-y-2 overflow-y-scroll">
       {commits?.map((c, i) => (
-        <li key={c.id} className="relative flex gap-x-4">
+        <li key={c.id} className="relative flex gap-x-4 pl-2 pr-2">
           <div
             className={cn(
               i === commits.length - 1 ? "h-6" : "-bottom-6",
               "absolute left-0 top-0 flex w-6 justify-center",
             )}
           >
-            <div className="w-px translate-x-1 bg-gray-200" />
+            <div className="w-px translate-x-1 bg-gray-200 ml-4" />
           </div>
           <>
             <Image
@@ -45,7 +45,7 @@ const CommitLog: FC<CommitLogProps> = ({}) => {
                   </span>{" "}
                   <span className="inline-flex items-center">
                     {c.commitMessage}
-                    <ExternalLink className="ml-1 size-4" />
+                    <ExternalLink className="ml-1 size-3.5" />
                   </span>
                 </Link>
               </div>

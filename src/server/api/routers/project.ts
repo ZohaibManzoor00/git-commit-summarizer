@@ -24,15 +24,7 @@ export const projectRouter = createTRPCRouter({
           },
         },
       });
-
-      // try {
       //   await indexGithubRepo(project.id, input.githubUrl, input.githubToken)
-      // } catch (err) {
-      //   console.error(`ERROR INDEXING GITHUB REPO - ${err}`)
-      // }
-      // return project
-
-      // await pollCommits(project.id);
       pollCommits(project.id).then().catch(console.error)
       return project;
     }),
