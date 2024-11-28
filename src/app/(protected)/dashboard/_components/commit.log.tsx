@@ -15,6 +15,8 @@ import {
   Github,
   RefreshCcw,
   RefreshCw,
+  Sparkles,
+  User,
   Users,
 } from "lucide-react";
 import useProject from "@/hooks/use-project";
@@ -52,8 +54,14 @@ const CommitLogContainer: FC = () => {
       : commits;
   }, [commits, query]);
 
-  if (isError) return <h1 className="text-center">Failed to load commits.</h1>;
-  if (isLoading) return <h1 className="text-center">Loading...</h1>;
+  if (isError)
+    return (
+      <h1 className="h-[calc(100vh-9.5rem)] text-center">
+        Failed to load commits.
+      </h1>
+    );
+  if (isLoading)
+    return <h1 className="h-[calc(100vh-9.5rem)] text-center">Loading...</h1>;
   if (!commits || commits.length === 0) {
     return (
       <div className="flex items-center justify-center gap-x-4">
@@ -66,7 +74,9 @@ const CommitLogContainer: FC = () => {
   }
 
   if (!filteredCommits || filteredCommits.length === 0)
-    return <h1 className="text-center">No commits found.</h1>;
+    return (
+      <h1 className="h-[calc(100vh-9.5rem)] text-center">No commits found.</h1>
+    );
 
   const allAuthors = [
     ...new Set(filteredCommits.map((c) => c.commitAuthorName)),
@@ -103,7 +113,7 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
   numOfAISummaries,
 }) => {
   return (
-    <>
+    <div className="space-y-2">
       <div className="space-y-4 px-4 pb-2">
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <div className="flex flex-wrap gap-2">
@@ -129,7 +139,7 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
         </div>
       </div>
       <div className="h-2" />
-      <ul className="h-[calc(100vh-13.6rem)] space-y-2 overflow-y-scroll">
+      <ul className="h-[calc(100vh-14.5rem)] space-y-4 overflow-y-scroll">
         {commits.map((c, i) => (
           <li key={c.id} className="relative flex gap-x-4 px-2">
             <div
@@ -140,14 +150,21 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
             >
               <div className="ml-4 w-px translate-x-1 bg-gray-200" />
             </div>
-            <Image
-              src={c.commitAuthorAvatar}
-              alt={`${c.commitAuthorName}'s avatar`}
-              className="relative mt-4 size-8 flex-none rounded-full bg-gray-50"
-              width={40}
-              height={40}
-            />
-            <div className="flex-auto rounded-md bg-white p-3 ring-1 ring-inset ring-gray-100">
+            {c.commitAuthorAvatar ? (
+              <Image
+                src={c.commitAuthorAvatar ?? ""}
+                alt={`${c.commitAuthorName}'s avatar`}
+                className="relative mt-4 size-8 flex-none rounded-full bg-gray-50"
+                width={40}
+                height={40}
+              />
+            ) : (
+              <div className="relative mt-4 flex size-8 flex-none items-center justify-center rounded-full bg-gray-50">
+                <User className="text-primary/40" />
+              </div>
+            )}
+
+            <div className="flex-auto rounded-md bg-white p-3 ring-2 ring-inset ring-gray-100">
               <div className="flex justify-between gap-x-4">
                 <Link
                   target="_blank"
@@ -173,7 +190,6 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
                         Copy
                       </button>
                     </div>
-                    {/* </div> */}
                     <div className="justify-end font-medium text-gray-900">
                       {formatDistanceToNow(new Date(c.createdAt), {
                         addSuffix: true,
@@ -189,15 +205,24 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
               </div>
 
               <span className="font-semibold">{c.commitMessage}</span>
-              <pre className="mt-2 whitespace-pre-wrap text-sm leading-6 text-gray-600">
+              <div className="mt-2 rounded-lg bg-muted/50 p-4">
+                <div className="mb-2 flex items-center gap-2 text-sm font-medium leading-6">
+                  <Sparkles className="h-4 w-4" />
+                  <h1>AI Summary</h1>
+                </div>
+                <pre className="text-sm text-muted-foreground whitespace-pre-wrap">
+                  {c.summary.trim()}
+                </pre>
+              </div>
+              {/* <pre className="mt-2 whitespace-pre-wrap text-sm leading-6 text-gray-600">
                 {c.summary.trim()}
-              </pre>
+              </pre> */}
             </div>
           </li>
         ))}
         <div className="h-1" />
       </ul>
-    </>
+    </div>
   );
 };
 

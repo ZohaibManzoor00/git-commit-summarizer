@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import {
   Sidebar,
@@ -39,6 +40,7 @@ export default function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon" variant="floating">
+       <Card className="h-full rounded-md">
       <SidebarHeader className="ml-[.4rem]">
         <div className="mt-[5px] flex items-center gap-2">
           <GitBranch className="h-6 w-6" />
@@ -48,7 +50,7 @@ export default function AppSidebar() {
         </div>
       </SidebarHeader>
       {/* <Separator className="mb-2 mt-[5px]" /> */}
-
+         
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
@@ -136,6 +138,7 @@ export default function AppSidebar() {
           </div>
         </div>
       </SidebarContent>
+      </Card>
     </Sidebar>
   );
 }
