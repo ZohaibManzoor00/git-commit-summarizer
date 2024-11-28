@@ -9,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import {
+  Bot,
   ExternalLink,
   GitCommit,
   Github,
@@ -70,9 +71,7 @@ const CommitLogContainer: FC = () => {
   const allAuthors = [
     ...new Set(filteredCommits.map((c) => c.commitAuthorName)),
   ];
-  const numOfAISummaries = filteredCommits.filter(
-    (c) => c.summary.length > 0,
-  ).length;
+  const numOfAISummaries = filteredCommits.filter((c) => c.summary.length > 0);
 
   return (
     <MemoizedCommitLogPresenter
@@ -80,8 +79,8 @@ const CommitLogContainer: FC = () => {
       project={project}
       refetch={refetch}
       isFetching={isFetching}
-      authors={allAuthors}
-      numOfAISummaries={numOfAISummaries}
+      numOfAuthors={allAuthors.length}
+      numOfAISummaries={numOfAISummaries.length}
     />
   );
 };
@@ -91,7 +90,7 @@ interface CommitLogPresenterProps {
   project?: Project;
   refetch: any;
   isFetching: boolean;
-  authors: string[];
+  numOfAuthors: number;
   numOfAISummaries: number;
 }
 
@@ -100,79 +99,37 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
   project,
   refetch,
   isFetching,
-  authors,
+  numOfAuthors,
   numOfAISummaries,
 }) => {
   return (
-    <Card>
-      {/* <div className="border-bg-gray-600 mx-2 flex items-center justify-between space-x-4 rounded-sm border-[1.5px] px-2 py-2">
-        <div>
-          <h1>{numOfAISummaries} AI summaries</h1>
-        </div>
-        <div className="flex items-center space-x-4">
-          <h1>
-            {authors.length} Contributor{authors.length === 1 ? "" : "s"}
-          </h1>
-          <h1>{commits.length} Commits</h1>
-          <Button
-            size="sm"
-            onClick={() => refetch()}
-            disabled={isFetching}
-            className="rounded px-4 py-2"
-          >
-            <RefreshCcw className={isFetching ? "animate-spin" : ""} />
-            {isFetching ? "Syncing" : "Sync changes"}
-          </Button>
-        </div>
-      </div> */}
-      <CardHeader className="space-y-4">
-        {/* <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-black p-2 text-white dark:bg-white dark:text-black">
-              <span className="text-2xl font-bold">HB</span>
-            </div>
-            <div>
-              <CardTitle>Homebrew</CardTitle>
-              <CardDescription className="flex items-center gap-2">
-                <Github className="h-4 w-4" />
-                github.com/Homebrew/brew
-              </CardDescription>
-            </div>
-          </div>
-          <Button variant="outline" asChild className="hidden md:flex">
-            <a
-              href="https://github.com/Homebrew/brew"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github className="mr-2 h-4 w-4" />
-              View On Github
-            </a>
-          </Button>
-        </div> */}
-        {/* <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+    <>
+      <div className="space-y-4 px-4 pb-2">
+        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <div className="flex flex-wrap gap-2">
             <Badge variant="secondary" className="text-sm">
-              15 AI summaries
+              <Bot className="mr-1 size-4" />
+              {numOfAISummaries} AI summaries
             </Badge>
             <Badge variant="secondary" className="text-sm">
-              <Users className="mr-1 h-3 w-3" />4 Contributors
+              <Users className="mr-1 size-3.5" />
+              {numOfAuthors} Contributor{numOfAuthors > 1 ? "s" : ""}
             </Badge>
             <Badge variant="secondary" className="text-sm">
-              <GitCommit className="mr-1 h-3 w-3" />
+              <GitCommit className="mr-1 size-5" />
               30 Commits
             </Badge>
           </div>
           <Button onClick={() => refetch()} disabled={isFetching}>
             <RefreshCw
-              className={`mr-2 h-4 w-4 ${isFetching ? "animate-spin" : ""}`}
+              className={`mr-1 h-4 w-4 ${isFetching ? "animate-spin" : ""}`}
             />
             Sync changes
           </Button>
-        </div> */}
-      </CardHeader>
+        </div>
+      </div>
       <div className="h-2" />
-      <ul className="h-[calc(100vh-10.6rem)] space-y-2 overflow-y-scroll">
+      <ul className="h-[calc(100vh-13.6rem)] space-y-2 overflow-y-scroll">
         {commits.map((c, i) => (
           <li key={c.id} className="relative flex gap-x-4 px-2">
             <div
@@ -240,7 +197,7 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
         ))}
         <div className="h-1" />
       </ul>
-    </Card>
+    </>
   );
 };
 
