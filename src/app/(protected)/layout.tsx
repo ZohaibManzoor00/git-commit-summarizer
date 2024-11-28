@@ -19,7 +19,7 @@ const SidebarLayout: FC<Props> = ({ children }) => {
           </div>
           <UserButton />
         </header>
-        <div className="h-3" />
+        <div className="h-2.5" />
         <div className="h-[calc(100vh-5.2rem)] rounded-md border border-sidebar-border bg-sidebar shadow">
           {children}
         </div>

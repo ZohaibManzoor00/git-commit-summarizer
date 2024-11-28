@@ -47,7 +47,7 @@ export default function AppSidebar() {
           ) : null}
         </div>
       </SidebarHeader>
-      <Separator className="mb-2 mt-[5px]" />
+      {/* <Separator className="mb-2 mt-[5px]" /> */}
 
       <SidebarContent>
         <SidebarGroup>
@@ -77,7 +77,7 @@ export default function AppSidebar() {
           <SidebarGroupLabel>Your Projects</SidebarGroupLabel>
           <SidebarContent>
             <SidebarMenu>
-              <ul>
+              <ul className="h-60 overflow-y-scroll">
                 {projects?.map((project) => (
                   <SidebarMenuItem key={project.name}>
                     <SidebarMenuButton asChild>
@@ -117,7 +117,7 @@ export default function AppSidebar() {
         </SidebarGroup>
 
         <div className="mt-auto pt-4">
-          <Separator className="my-1" />
+          {/* <Separator className="my-1" /> */}
           <div className="flex justify-evenly mb-1">
             <Button variant="ghost" size="icon" className="hover:bg-muted">
               <Settings className="h-4 w-4" />
