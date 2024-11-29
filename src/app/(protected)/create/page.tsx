@@ -5,12 +5,9 @@ import { Input } from "@/components/ui/input";
 import useRefetch from "@/hooks/use-refetch";
 import { api } from "@/trpc/react";
 import { GithubIcon } from "lucide-react";
-import Image from "next/image";
-import { FC } from "react";
+import type { FC } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-
-interface CreatePageProps {}
 
 type FormInput = {
   repoUrl: string;
@@ -18,7 +15,7 @@ type FormInput = {
   githubToken?: string;
 };
 
-const CreatePage: FC<CreatePageProps> = ({}) => {
+const CreatePage: FC = () => {
   const { register, handleSubmit, reset } = useForm<FormInput>();
   const createProject = api.project.createProject.useMutation();
   const refetch = useRefetch();
@@ -33,7 +30,7 @@ const CreatePage: FC<CreatePageProps> = ({}) => {
       {
         onSuccess: () => {
           toast.success("Project created successfully");
-          refetch();
+          refetch().then().catch(console.error);
           reset();
         },
         onError: () => {

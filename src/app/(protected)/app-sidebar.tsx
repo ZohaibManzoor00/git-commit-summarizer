@@ -79,7 +79,7 @@ export default function AppSidebar() {
           <SidebarGroupLabel>Your Projects</SidebarGroupLabel>
           <SidebarContent>
             <SidebarMenu>
-              <ul className="h-60 overflow-y-scroll">
+              <ul className="max-h-80 overflow-y-scroll">
                 {projects?.map((project) => (
                   <SidebarMenuItem key={project.name}>
                     <SidebarMenuButton asChild>

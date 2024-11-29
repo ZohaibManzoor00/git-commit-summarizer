@@ -1,16 +1,14 @@
 "use client";
 
-import { ChangeEvent, FC, useRef, useState } from "react";
+import { type FC, ChangeEvent, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 
-interface SearchProps {}
-
-const Search: FC<SearchProps> = () => {
+const Search: FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const initialQuery = searchParams.get("query") || "";
+  const initialQuery = searchParams.get("query") ?? "";
   const [query, setQuery] = useState(initialQuery);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 

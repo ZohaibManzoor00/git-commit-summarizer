@@ -68,7 +68,7 @@ const loadGithubRepo = async (
   githubToken?: string,
 ) => {
   const loader = new GithubRepoLoader(githubUrl, {
-    accessToken: githubToken || "",
+    accessToken: githubToken ?? "",
     branch: "main",
     ignoreFiles: [
       "package-lock.json",

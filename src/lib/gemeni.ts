@@ -60,7 +60,7 @@ export const summarizeCode = async (doc: Document) => {
 
     return aiResponse.response.text();
   } catch (err) {
-    console.error(`[ERROR] SUMMARIZING CODE for ${doc.metadata} - ${err}`)
+    console.error(`[ERROR] SUMMARIZING CODE for ${JSON.stringify(doc.metadata)} - ${err}`)
     return ""
   }
 };
