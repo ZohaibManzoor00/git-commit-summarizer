@@ -3,15 +3,19 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { GitFork, Github, Star } from "lucide-react";
+
 import useProject from "@/hooks/use-project";
-import CommitLog from "./_components/commit.log";
 import { Button } from "@/components/ui/button";
-import { CardTitle, CardDescription, Card } from "@/components/ui/card";
+import CommitLog from "./_components/commit.log";
 import HyperText from "@/components/ui/hyper-text";
 import StarButton from "./_components/star-button";
+import { CardTitle, CardDescription, Card } from "@/components/ui/card";
+import Spinner from "./_components/loader";
 
 const DashboardPage = () => {
-  const { project, isLoading } = useProject();
+  const { project, isLoading, isError } = useProject();
+
+  if (isError) return <Spinner text="An error has occurred" isLoading={false} />;
 
   return (
     <Card className="rounded-sm">
@@ -49,12 +53,15 @@ const DashboardPage = () => {
           </CardDescription>
         </div>
         <div className="flex gap-2">
-          {!isLoading && project ? <StarButton /> : 
-           <Button variant="outline" className="gap-1.5">
-           <Star className="h-4 w-4" />
-           Star
-         </Button>}
-         
+          {!isLoading && project ? (
+            <StarButton />
+          ) : (
+            <Button variant="outline" className="gap-1.5">
+              <Star className="h-4 w-4" />
+              Star
+            </Button>
+          )}
+
           <Button asChild className="hidden sm:flex">
             <a
               href={project?.githubUrl}
@@ -67,7 +74,7 @@ const DashboardPage = () => {
           </Button>
         </div>
       </header>
-      <Suspense fallback={<div>Loading Commit Log...</div>}>
+      <Suspense fallback={<Spinner text="Loading commit log..." />}>
         <CommitLog />
       </Suspense>
     </Card>

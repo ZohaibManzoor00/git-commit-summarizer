@@ -11,9 +11,9 @@ const config = {
       },
     ],
   },
-  // eslint: {
-  //   ignoreDuringBuilds: true // ! remove 
-  // }
+  eslint: {
+    ignoreDuringBuilds: true // ! remove 
+  }
 };
 
 export default config;

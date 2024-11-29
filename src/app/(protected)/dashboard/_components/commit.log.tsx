@@ -36,6 +36,7 @@ const CommitLogContainer: FC = () => {
   const searchParams = useSearchParams();
   const search = searchParams.get("query") ?? "";
   const query = search.toLowerCase();
+
   const filteredCommits = useMemo(() => {
     return query
       ? commits?.filter(

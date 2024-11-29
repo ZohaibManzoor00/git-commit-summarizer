@@ -47,8 +47,8 @@ export default function HyperText({
           return;
         }
         if (interations.current < text.length) {
-          setDisplayText((t) =>
-            t.map((l, i) =>
+          setDisplayText((t: any) =>
+            t.map((l: any, i: any) =>
               l === " "
                 ? l
                 : i <= interations.current
@@ -64,7 +64,7 @@ export default function HyperText({
       },
       duration / (text.length * 10)
     );
-    // Clean up interval on unmount
+    
     return () => clearInterval(interval);
   }, [text, duration, trigger, animateOnLoad]);
 
