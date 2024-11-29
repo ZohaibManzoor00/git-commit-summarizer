@@ -10,10 +10,8 @@ import { formatDistanceToNow } from "date-fns";
 
 import { cn } from "@/lib/utils";
 import {
-  Copy,
   ExternalLink,
   GitCommit,
-  GitCommitVertical,
   RefreshCw,
   Sparkles,
   User,
@@ -23,6 +21,7 @@ import useProject from "@/hooks/use-project";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import CopySection from "./copy-section";
+import Spinner from "./loader";
 
 const CommitLogContainer: FC = () => {
   const { projectId, project } = useProject();
@@ -37,7 +36,6 @@ const CommitLogContainer: FC = () => {
   const searchParams = useSearchParams();
   const search = searchParams.get("query") ?? "";
   const query = search.toLowerCase();
-
   const filteredCommits = useMemo(() => {
     return query
       ? commits?.filter(
@@ -48,18 +46,13 @@ const CommitLogContainer: FC = () => {
       : commits;
   }, [commits, query]);
 
-  if (isError)
-    return (
-      <h1 className="h-[calc(100vh-9.5rem)] text-center">
-        Failed to load commits.
-      </h1>
-    );
-  if (isLoading)
-    return <h1 className="h-[calc(100vh-9.5rem)] text-center">Loading...</h1>;
+  if (isError) return <Spinner text="Failed to load commits." isLoading={false} />;
 
-  if (!commits || commits.length === 0) {
+  if (isLoading) return <Spinner />;
+
+  if (!commits || !commits.length) {
     return (
-      <div className="flex h-[calc(100vh-9.5rem)] items-center justify-center gap-x-4">
+      <div className="flex h-[calc(100vh-10.5rem)] items-center justify-center gap-x-4">
         <h1 className="text-center">No commits found.</h1>
         <Button disabled={isFetching} onClick={() => refetch()}>
           Try Again
@@ -68,14 +61,9 @@ const CommitLogContainer: FC = () => {
     );
   }
 
-  if (!filteredCommits || filteredCommits.length === 0)
-    return (
-      <h1 className="h-[calc(100vh-9.5rem)] text-center">No commits found.</h1>
-    );
+  if (!filteredCommits || !filteredCommits.length) return <Spinner text="No commits found." isLoading={false} />;
 
-  const allAuthors = [
-    ...new Set(filteredCommits.map((c) => c.commitAuthorName)),
-  ];
+  const allAuthors = [...new Set(filteredCommits.map((c) => c.commitAuthorName))];
   const numOfAISummaries = filteredCommits.filter((c) => c.summary.length > 0);
 
   return (
@@ -128,16 +116,22 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
               {totalCommits} Commits
             </Badge>
           </div>
-          <Button onClick={() => refetch()} disabled={isFetching}>
+          <Button
+            size="sm"
+            className="gap-x-1.5"
+            variant="outline"
+            onClick={() => refetch()}
+            disabled={isFetching}
+          >
             <RefreshCw
-              className={`mr-1 h-4 w-4 ${isFetching ? "animate-spin" : ""}`}
+              className={cn("!size-3", isFetching ? "animate-spin" : "")}
             />
-            Sync changes
+            Sync
           </Button>
         </div>
       </div>
-      <div className="h-2" />
-      <ul className="h-[calc(100vh-14.5rem)] space-y-4 overflow-y-scroll">
+      <div className="h-1" />
+      <ul className="h-[calc(100vh-14.2rem)] space-y-4 overflow-y-scroll">
         {commits.map((c, i) => (
           <li key={c.id} className="relative flex gap-x-4 px-2">
             <div
@@ -166,10 +160,11 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-1">
-                    <GitCommitVertical className="size-5 text-primary/30" />
-                    <span className="font-medium">{c.commitAuthorName}</span>
+                    <span className="ml-1 font-medium">
+                      {c.commitAuthorName}
+                    </span>
                   </div>
-                  <CopySection commitHash={c.commitHash}/>
+                  <CopySection commitHash={c.commitHash} />
                 </div>
                 <time className="text-sm text-muted-foreground">
                   {formatDistanceToNow(new Date(c.createdAt), {
