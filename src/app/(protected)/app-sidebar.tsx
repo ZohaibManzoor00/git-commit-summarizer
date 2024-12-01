@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -29,6 +29,7 @@ export default function AppSidebar() {
   const pathname = usePathname();
   const { open } = useSidebar();
   const { projects, projectId, setProjectId } = useProject();
+  const router = useRouter();
 
   return (
     <Sidebar collapsible="icon" variant="floating">
@@ -41,7 +42,6 @@ export default function AppSidebar() {
             ) : null}
           </div>
         </SidebarHeader>
-        {/* <Separator className="mb-2 mt-[5px]" /> */}
 
         <SidebarContent>
           <SidebarGroup>
@@ -57,6 +57,7 @@ export default function AppSidebar() {
                           ? "hover:bg-primary hover:text-white"
                           : null,
                       )}
+                      onClick={() => setProjectId("")}
                     >
                       <Link
                         href={item.url}
@@ -94,7 +95,10 @@ export default function AppSidebar() {
                       <SidebarMenuButton asChild>
                         <div
                           role="button"
-                          onClick={() => setProjectId(project.id)}
+                          onClick={() => {
+                            setProjectId(project.id);
+                            if (pathname !== 'dashboard') router.push("/dashboard");
+                          }}
                           className={cn(
                             "flex items-center rounded px-2 py-1",
                             !open ? "justify-center" : "",
@@ -102,7 +106,7 @@ export default function AppSidebar() {
                         >
                           <div
                             className={cn(
-                              "flex h-6 w-6 p-2 items-center justify-center rounded-sm border bg-white text-sm font-medium",
+                              "flex h-6 w-6 items-center justify-center rounded-sm border bg-white p-2 text-sm font-medium",
                               {
                                 "bg-primary text-white":
                                   project.id === projectId,
@@ -115,15 +119,15 @@ export default function AppSidebar() {
                             <div className="truncate">{project.name}</div>
                           )}
                           <span className="ml-auto">
-                          {project.isStarred && (
-                            <Star
-                              fill="currentColor"
-                              className={cn(
-                                "ml-auto size-3",
-                                !open ? "hidden" : "",
-                              )}
-                            />
-                          )}
+                            {project.isStarred && (
+                              <Star
+                                fill="currentColor"
+                                className={cn(
+                                  "ml-auto size-3",
+                                  !open ? "hidden" : "",
+                                )}
+                              />
+                            )}
                           </span>
                         </div>
                       </SidebarMenuButton>

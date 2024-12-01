@@ -147,7 +147,7 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
               <Image
                 src={c.commitAuthorAvatar ?? ""}
                 alt={`${c.commitAuthorName}'s avatar`}
-                className="relative mt-4 size-8 flex-none rounded-full bg-gray-50"
+                className="relative mt-4 size-8 flex-none rounded-full bg-gray-50 ring-1 ring-black/60"
                 width={40}
                 height={40}
               />

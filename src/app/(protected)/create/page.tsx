@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import useRefetch from "@/hooks/use-refetch";
 import { api } from "@/trpc/react";
@@ -41,7 +42,7 @@ const CreatePage: FC = () => {
   };
 
   return (
-    <div className="flex h-full items-center justify-center gap-12">
+    <Card className="flex h-full items-center justify-center gap-12 rounded-md">
       <GithubIcon size="100"/>
       {/* <Image src={"/"} alt="undraw-image" height={50} width={50} /> */}
       <div>
@@ -80,7 +81,7 @@ const CreatePage: FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

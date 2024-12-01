@@ -13,7 +13,7 @@ const SyncUser = async () => {
   if (!userEmail) return notFound();
 
   await db.user.upsert({
-    where: { emailAddress: userEmail ?? "" },
+    where: { emailAddress: userEmail },
     update: {
       imageUrl: user.imageUrl,
       firstName: user.firstName ?? "Anonymous",
