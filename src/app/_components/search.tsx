@@ -1,7 +1,7 @@
 "use client";
 
 import { type FC, ChangeEvent, useRef, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 import useProject from "@/hooks/use-project";
