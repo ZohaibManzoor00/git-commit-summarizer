@@ -6,8 +6,6 @@ import { useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import useProject from "@/hooks/use-project";
 import ProjectStats from "./dashboard-project-stats";
-import useRefetch from "@/hooks/use-refetch";
-'force-dynamic'
 
 const DashboardBottom: FC = () => {
   const { projects } = useProject();
