@@ -4,6 +4,8 @@ import { useUser } from "@clerk/nextjs";
 import { Github, GitFork } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CardDescription, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+
 
 const DashboardTop: FC = () => {
   const { user } = useUser();
@@ -28,14 +30,19 @@ const DashboardTop: FC = () => {
           </CardTitle>
 
           <CardDescription>
-            <Link
-              target="_blank"
-              href={"https://github.com/"}
-              className="flex items-center hover:underline"
+            <Badge
+              variant="secondary"
+              className="rounded-full font-mono text-xs"
             >
-              <Github className="mr-0.5 size-3.5" />
-              <p>github.com</p>
-            </Link>
+              <Link
+                target="_blank"
+                href={"https://github.com/"}
+                className="flex items-center hover:underline"
+              >
+                <Github className="mr-1 size-3.5" />
+                <p>github.com</p>
+              </Link>
+            </Badge>
           </CardDescription>
         </div>
         <div className="flex gap-2">

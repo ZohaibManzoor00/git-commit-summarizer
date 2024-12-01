@@ -8,11 +8,10 @@ import { CardDescription, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import StarButton from "./star-button";
 import DeleteProjectButton from "./delete-project-button";
-import { useUser } from "@clerk/nextjs";
+import { Badge } from "@/components/ui/badge";
 
 const CommitTopInfo: FC = () => {
-  const { project, isLoading, projectId } = useProject();
-  const { user } = useUser()
+  const { project, isLoading } = useProject();
 
   return (
     <header className="flex items-center gap-3 px-4 py-4">
@@ -20,8 +19,9 @@ const CommitTopInfo: FC = () => {
         <div className="flex h-[1.9rem] w-9 justify-center text-2xl font-bold">
           {isLoading ? (
             <HyperText className="text-md justify-center" text="??" />
-          ) : <p>{project?.name.slice(0, 2).toUpperCase()}</p>
-          }
+          ) : (
+            <p>{project?.name.slice(0, 2).toUpperCase()}</p>
+          )}
         </div>
       </div>
       <div className="flex-1">
@@ -37,18 +37,20 @@ const CommitTopInfo: FC = () => {
         </CardTitle>
 
         <CardDescription>
-          <Link
-            target="_blank"
-            href={project?.githubUrl ?? ""}
-            className="flex items-center hover:underline"
-          >
-            <Github className="mr-0.5 size-3.5" />
-            {isLoading ? (
-              <HyperText className="text-md" text="github.com/..." />
-            ) : (
-              project?.githubUrl.slice(8)
-            )}
-          </Link>
+          <Badge variant="secondary" className="rounded-full font-mono text-xs">
+            <Link
+              target="_blank"
+              href={project?.githubUrl ?? ""}
+              className="flex items-center hover:underline"
+            >
+              <Github className="mr-1 size-3.5" />
+              {isLoading ? (
+                <HyperText className="text-md" text="github.com/..." />
+              ) : (
+                project?.githubUrl.slice(8)
+              )}
+            </Link>
+          </Badge>
         </CardDescription>
       </div>
       <div className="flex gap-2">

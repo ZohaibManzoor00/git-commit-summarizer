@@ -44,16 +44,11 @@ const StarButton: FC = () => {
   return (
     <Button
       onClick={handleClick}
-      variant={isStarred ? "default" : "outline"}
+      variant="outline"
       className="gap-1.5"
       disabled={isLoading || toggleStar.isPending}
     >
-      <Star className="!size-3.5" fill={isStarred ? "currentColor" : "none"} />
-      {isLoading
-        ? "Processing..."
-        : isStarred
-        ? "Starred"
-        : "Star"}
+      <Star className="!size-3.5 text-yellow-600" fill={isStarred ? "currentColor" : "none"}/>
     </Button>
   );
 };

@@ -13,6 +13,11 @@ import {
   GitMerge,
   ExternalLink,
   User,
+  FolderKanban,
+  GitPullRequest,
+  Bot,
+  GitCommitVertical,
+  FolderGit2,
 } from "lucide-react";
 import { type FC } from "react";
 import { ProjectCard } from "./project-card";
@@ -39,7 +44,7 @@ const ProjectStats: FC = () => {
             <CardTitle className="text-sm font-medium">
               Total Projects
             </CardTitle>
-            <Plus className="size-4 text-muted-foreground" />
+            <FolderGit2 className="size-4 text-green-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{data?.totalProjects}</div>
@@ -50,7 +55,7 @@ const ProjectStats: FC = () => {
             <CardTitle className="text-sm font-medium">
               Commits Tracked
             </CardTitle>
-            <GitCommit className="size-4 text-muted-foreground" />
+            <GitPullRequest className="size-4 text-blue-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{data?.totalCommits}</div>
@@ -59,7 +64,7 @@ const ProjectStats: FC = () => {
         <Card className="hover:bg-muted/50">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">AI Summaries</CardTitle>
-            <WandSparkles className="size-4 text-muted-foreground" />
+            <Bot className="size-4 text-purple-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
@@ -80,13 +85,17 @@ const ProjectStats: FC = () => {
           <CardContent>
             {data?.latestCommits && data?.latestCommits.length > 0 ? (
               <div className="h-60 space-y-4 overflow-y-auto">
-                {data?.latestCommits.map((commit) => (
+                {data?.latestCommits.map((commit, i) => (
                   <div
                     key={commit.id}
                     className="group flex items-start gap-4 rounded-lg border p-3 hover:bg-muted/50"
                   >
                     <div className="mt-1">
-                      <GitMerge className="size-4 text-purple-600" />
+                      {i % 2 === 0 ? (
+                        <GitMerge className="size-4 text-purple-600" />
+                      ) : (
+                        <GitCommitVertical className="size-4 text-blue-600" />
+                      )}
                     </div>
                     <div className="grid gap-1">
                       <div className="flex max-w-full items-center gap-2 truncate">
@@ -118,7 +127,7 @@ const ProjectStats: FC = () => {
                         <span>•</span>
                         <span>
                           <time className="text-sm text-muted-foreground">
-                            {formatDistanceToNow(new Date(commit.createdAt))}
+                            {formatDistanceToNow(new Date(commit.commitDate))}
                           </time>
                         </span>
                         <span>•</span>

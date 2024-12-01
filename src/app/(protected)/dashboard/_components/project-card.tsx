@@ -28,8 +28,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
             {project.name}
           </CardTitle>
           <Star
-            fill={project.isStarred ? "black" : "none"}
-            className="mr-1 h-4 w-4"
+            fill={project.isStarred ? "currentColor" : "none"}
+            className="mr-1 h-4 w-4 text-yellow-600"
           />
         </CardHeader>
       </div>

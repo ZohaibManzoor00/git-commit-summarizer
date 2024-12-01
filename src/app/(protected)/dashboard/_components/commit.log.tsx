@@ -10,6 +10,7 @@ import { formatDistanceToNow } from "date-fns";
 
 import { cn } from "@/lib/utils";
 import {
+  Clock,
   ExternalLink,
   GitCommit,
   RefreshCw,
@@ -104,16 +105,17 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
       <div className="space-y-4 px-4 pb-2">
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <div className="flex flex-wrap gap-2">
-            <Badge variant="secondary" className="text-sm">
-              <Sparkles className="mr-1 size-4" />
+            <Badge variant="secondary" className="text-sm bg-gradient-to-br from-purple-500/10 to-purple-500/5
+            ">
+              <Sparkles className="mr-1 size-4 text-purple-500" />
               {numOfAISummaries} AI summaries
             </Badge>
-            <Badge variant="secondary" className="text-sm">
-              <Users className="mr-1 size-4" />
+            <Badge variant="secondary" className="text-sm bg-gradient-to-br from-green-500/10 to-green-500/5">
+              <Users className="mr-1 size-4 text-green-500" />
               {numOfAuthors} Contributor{numOfAuthors > 1 ? "s" : ""}
             </Badge>
-            <Badge variant="secondary" className="text-sm">
-              <GitCommit className="mr-1 size-5" />
+            <Badge variant="secondary" className="text-sm bg-gradient-to-br from-blue-500/10 to-blue-500/5">
+              <GitCommit className="mr-1 size-5 text-blue-500" />
               {totalCommits} Commits
             </Badge>
           </div>
@@ -159,7 +161,7 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
 
             <div className="flex-auto rounded-md bg-white p-4 ring-2 ring-inset ring-gray-100">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
                   <div className="flex items-center gap-1">
                     <span className="ml-1 font-medium">
                       {c.commitAuthorName}
@@ -167,11 +169,14 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
                   </div>
                   <CopySection commitHash={c.commitHash} />
                 </div>
+                <span className="flex gap-x-1 items-center">
+                  <Clock className="size-4 text-muted-foreground"/>
                 <time className="text-sm text-muted-foreground">
-                  {formatDistanceToNow(new Date(c.createdAt), {
+                  {formatDistanceToNow(new Date(c.commitDate), {
                     addSuffix: true,
                   })}
                 </time>
+                  </span>
               </div>
               <Link
                 target="_blank"
@@ -184,16 +189,16 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
                     {c.commitMessage}
                   </h2>
                   <div className="flex items-center gap-x-1">
-                    <p className="text-muted-foreground group-hover:underline">{`${project?.githubUrl.slice(19)}/commit/${c.commitHash}`}</p>
+                    <p className="text-muted-foreground group-hover:underline">{`${project?.githubUrl.slice(19)}`}</p>
                     <ExternalLink className="size-3 text-muted-foreground" />
                   </div>
                 </div>
               </Link>
 
-              <div className="rounded-lg bg-muted/50 p-4">
+              <div className="rounded-lg bg-purple-500/5 p-4">
                 <div className="mb-2 flex items-center gap-2 text-sm font-medium leading-6">
-                  <Sparkles className="h-4 w-4 text-primary/70" />
-                  <h1 className="text-primary/70">AI Summary</h1>
+                  <Sparkles className="h-4 w-4 text-purple-500" />
+                  <h1 className="text-purple-500">AI Summary</h1>
                 </div>
                 <pre className="whitespace-pre-wrap text-sm text-muted-foreground">
                   {c.summary.trim()}

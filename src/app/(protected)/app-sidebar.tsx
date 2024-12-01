@@ -123,7 +123,7 @@ export default function AppSidebar() {
                               <Star
                                 fill="currentColor"
                                 className={cn(
-                                  "ml-auto size-3",
+                                  "ml-auto size-3 text-yellow-600",
                                   !open ? "hidden" : "",
                                 )}
                               />

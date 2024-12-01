@@ -15,10 +15,10 @@ interface CommitActivityChartProps {
 
 const CommitActivityChart: FC<CommitActivityChartProps> = ({ commitsByWeekName }) => {
   return (
-    <Card className="h-full">
+    <Card className="h-full shadow-none">
       <CardHeader>
         <CardTitle>Commit Activity</CardTitle>
-        <CardDescription>Your history over the past week</CardDescription>
+        <CardDescription>Total commit history over the past week</CardDescription>
       </CardHeader>
       <CardContent className="mt-8">
         <div className="h-[200px]">

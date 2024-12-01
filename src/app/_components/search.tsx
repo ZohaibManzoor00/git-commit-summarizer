@@ -16,6 +16,7 @@ const Search: FC = () => {
   
   const handleSearchChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const newQuery = e.target.value.trim();
+    if (!projectId) return;
     setQuery(newQuery);
 
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -29,7 +30,7 @@ const Search: FC = () => {
     <Input
       type="text"
       name="query"
-      placeholder="Search..."
+      placeholder={projectId ? "Search..." : "Select a project"}
       className="w-full max-w-[600px] rounded-full bg-gray-400/15 px-4 py-1.5 text-sm"
       value={query}
       onChange={handleSearchChange}
