@@ -11,7 +11,7 @@ const SyncDashboardBtn: FC<SyncDashboardBtnProps> = ({}) => {
   return (
     <Button variant="outline" onClick={() => refetch()} disabled={isFetching}>
       <RefreshCw className="h-4 w-4" />
-      Sync
+      {isFetching ? "Syncing" : "Sync"}
     </Button>
   );
 };

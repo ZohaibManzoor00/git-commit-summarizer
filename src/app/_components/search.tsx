@@ -30,7 +30,7 @@ const Search: FC = () => {
     <Input
       type="text"
       name="query"
-      placeholder={projectId ? "Search..." : "Select a project"}
+      placeholder="Search..."
       className="w-full max-w-[600px] rounded-full bg-gray-400/15 px-4 py-1.5 text-sm"
       value={query}
       onChange={handleSearchChange}

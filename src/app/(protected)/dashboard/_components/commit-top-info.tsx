@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import Link from "next/link";
-import { Github, Star, GitFork } from "lucide-react";
+import { Github, Star, GitFork, Crown } from "lucide-react";
 
 import useProject from "@/hooks/use-project";
 import HyperText from "@/components/ui/hyper-text";
@@ -16,6 +16,7 @@ const CommitTopInfo: FC = () => {
   return (
     <header className="flex items-center gap-3 px-4 py-4">
       <div className="rounded-lg bg-black p-2 text-white dark:bg-white dark:text-black">
+        
         <div className="flex h-[1.9rem] w-9 justify-center text-2xl font-bold">
           {isLoading ? (
             <HyperText className="text-md justify-center" text="??" />
@@ -24,6 +25,7 @@ const CommitTopInfo: FC = () => {
           )}
         </div>
       </div>
+      
       <div className="flex-1">
         <CardTitle className="flex items-center gap-x-3 text-xl">
           {isLoading ? (
