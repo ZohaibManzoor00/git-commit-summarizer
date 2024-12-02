@@ -12,7 +12,7 @@ const DashboardBottom: FC = () => {
   const { projects } = useProject();
   const { user } = useUser();
 
-  if (projects?.length === 0) return <NoProject />;
+  // if (projects?.length === 0) return <NoProject />;
 
   return (
     <div className="mx-auto pt-1">
@@ -26,6 +26,7 @@ const DashboardBottom: FC = () => {
           </p>
         </div>
         <div className="flex gap-x-2">
+          {/* {project} */}
          <SyncDashboardBtn />
           <Button asChild>
             <Link href="/create">
@@ -36,7 +37,7 @@ const DashboardBottom: FC = () => {
         </div>
       </div>
       <div className="h-[calc(100vh-14.4rem)] overflow-y-auto">
-        <ProjectStats />
+        {projects?.length === 0 ? <NoProject /> : <ProjectStats />}
       </div>
     </div>
   );

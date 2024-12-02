@@ -41,7 +41,7 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
     <div className="space-y-2">
       <div className="space-y-4 px-4 pb-2">
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-          <div className="flex flex-wrap gap-2">
+          {/* <div className="flex flex-wrap gap-2">
             <Badge
               variant="secondary"
               className="bg-gradient-to-br from-purple-500/10 to-purple-500/5 text-sm"
@@ -63,6 +63,29 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
               <GitCommit className="mr-1 size-5 text-blue-500" />
               {totalCommits} Commits
             </Badge>
+          </div> */}
+           <div className="flex flex-wrap gap-2">
+            <Badge
+              variant="secondary"
+              className="bg-purple-500/10 text-sm text-purple-600"
+            >
+              <Sparkles className="mr-1 size-4 text-purple-500" />
+              {numOfAISummaries} AI summaries
+            </Badge>
+            <Badge
+              variant="secondary"
+              className="bg-green-500/10 text-sm text-green-600"
+            >
+              <Users className="mr-1 size-4 text-green-500" />
+              {numOfAuthors} Contributor{numOfAuthors > 1 ? "s" : ""}
+            </Badge>
+            <Badge
+              variant="secondary"
+              className="bg-blue-500/10 text-sm text-blue-600"
+            >
+              <GitCommit className="mr-1 size-5 text-blue-500" />
+              {totalCommits} Commits
+            </Badge>
           </div>
           <Button
             size="sm"
@@ -74,12 +97,12 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
             <RefreshCw
               className={cn("!size-3", isFetching ? "animate-spin" : "")}
             />
-            Sync
+            {isFetching ? "Syncing" : "Sync"}
           </Button>
         </div>
       </div>
-      <div className="h-1" />
-      <ul className="h-[calc(100vh-14.2rem)] space-y-4 overflow-y-scroll">
+      <div className="h-1"/>
+      <ul className="h-[calc(100vh-14.2rem)] space-y-4 overflow-y-scroll px-2">
         {commits.map((c, i) => (
           <li key={c.id} className="relative flex gap-x-4 px-2">
             <div
