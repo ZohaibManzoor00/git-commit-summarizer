@@ -67,9 +67,9 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
            <div className="flex flex-wrap gap-2">
             <Badge
               variant="secondary"
-              className="bg-purple-500/10 text-sm text-purple-500"
+              className="bg-purple-500/10 text-sm text-purple-600"
             >
-              <Sparkles className="mr-1 size-4 text-purple-600" />
+              <Sparkles className="mr-1 size-4 text-purple-500" />
               {numOfAISummaries} AI summaries
             </Badge>
             <Badge
@@ -97,7 +97,7 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
             <RefreshCw
               className={cn("!size-3", isFetching ? "animate-spin" : "")}
             />
-            Sync
+            {isFetching ? "Syncing" : "Sync"}
           </Button>
         </div>
       </div>
