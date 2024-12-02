@@ -42,7 +42,7 @@ const CreatePage: FC = () => {
   };
 
   return (
-    <Card className="flex h-full items-center justify-center gap-12 rounded-md">
+    <Card className="flex h-full items-center justify-center gap-12 rounded-none border-none shadow-none">
       <GithubIcon size="100"/>
       {/* <Image src={"/"} alt="undraw-image" height={50} width={50} /> */}
       <div>

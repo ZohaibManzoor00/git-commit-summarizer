@@ -5,7 +5,7 @@ import DashboardBottom from "./general-dash-bottom";
 
 const GeneralDash: FC = () => {
   return (
-    <Card className="rounded-md">
+    <Card className="rounded-none border-none shadow-none">
       <DashboardTop />
       <DashboardBottom />
     </Card>

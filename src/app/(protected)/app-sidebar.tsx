@@ -19,6 +19,7 @@ import {
 import useProject from "@/hooks/use-project";
 import { cn } from "@/lib/utils";
 import { Bot, GitBranch, LayoutDashboard, Plus, Star } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 const sidebarItems = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
@@ -32,10 +33,14 @@ export default function AppSidebar() {
   const router = useRouter();
 
   return (
-    <Sidebar collapsible="icon" variant="floating">
-      <Card className="h-full rounded-md">
+    <Sidebar
+      collapsible="icon"
+      variant="sidebar"
+      className="border-none shadow-none"
+    >
+      <Card className="border-r-1 h-full rounded-none shadow-none">
         <SidebarHeader className="ml-[.4rem]">
-          <div className="mt-[5px] flex items-center gap-2">
+          <div className="mt-3 flex items-center gap-2">
             <GitBranch className="h-6 w-6" />
             {open ? (
               <h1 className="text-xl font-semibold">Git Interact</h1>
@@ -97,7 +102,8 @@ export default function AppSidebar() {
                           role="button"
                           onClick={() => {
                             setProjectId(project.id);
-                            if (pathname !== 'dashboard') router.push("/dashboard");
+                            if (pathname !== "dashboard")
+                              router.push("/dashboard");
                           }}
                           className={cn(
                             "flex items-center rounded px-2 py-1",

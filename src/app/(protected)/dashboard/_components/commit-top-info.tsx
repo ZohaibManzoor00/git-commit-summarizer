@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import Link from "next/link";
-import { Github, Star, GitFork, Crown } from "lucide-react";
+import { Github, Star, GitFork } from "lucide-react";
 
 import useProject from "@/hooks/use-project";
 import HyperText from "@/components/ui/hyper-text";

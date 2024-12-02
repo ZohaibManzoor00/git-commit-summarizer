@@ -111,7 +111,7 @@ const ProjectStats: FC = () => {
                           <ExternalLink className="h-3.5 w-3.5" />
                         </a>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground truncate">
                         <Tooltip>
                           <TooltipTrigger className="hover:underline">
                             {commit.commitHash.substring(0, 7)}
@@ -128,7 +128,7 @@ const ProjectStats: FC = () => {
                         </span>
                         <span>•</span>
                         <Badge
-                          variant="outline"
+                          variant="secondary"
                           className="rounded-full font-normal"
                         >
                           <span className="cursor-pointer hover:underline">
@@ -176,8 +176,8 @@ const ProjectStats: FC = () => {
         <Card className="col-span-3">
           <CommitActivityChart commitsByWeekName={data?.commitsChartData} />
         </Card>
-        <div className="h-1" />
       </div>
+      <div className="h-1" />
       <h2 className="text-2xl font-semibold">Your Projects</h2>
       <div className="h-1" />
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

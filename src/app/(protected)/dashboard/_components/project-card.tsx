@@ -1,4 +1,4 @@
-import { Github, Star } from "lucide-react";
+import { Calendar, Github, Star } from "lucide-react";
 import Link from "next/link";
 
 import {
@@ -10,8 +10,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Project } from "@prisma/client";
-import { formatDistanceToNow } from "date-fns";
+import { format } from "date-fns";
 import useProject from "@/hooks/use-project";
+import { Badge } from "@/components/ui/badge";
 
 interface ProjectCardProps {
   project: Project;
@@ -23,7 +24,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Card className="hover:bg-muted/50">
       <div className="group" onClick={() => setProjectId(project.id)}>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-0 cursor-pointer">
+        <CardHeader className="flex cursor-pointer flex-row items-center justify-between space-y-0 pb-0">
           <CardTitle className="text-md font-medium group-hover:underline">
             {project.name}
           </CardTitle>
@@ -45,12 +46,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
             {project?.githubUrl.slice(8)}
           </Link>
         </CardDescription>
-        <CardFooter className="pb-0 flex justify-end px-0">
-          <time className="text-sm text-muted-foreground">
-            {formatDistanceToNow(new Date(project.createdAt), {
-              addSuffix: true,
-            })}
-          </time>
+        <CardFooter className="flex items-center justify-end px-0 pb-0 pt-2">
+          <Badge variant="secondary" className="px-3">
+            <Calendar className="size-3.5 text-muted-foreground mr-1" />
+            <time className="text-xs text-muted-foreground">
+              {format(new Date(project.createdAt), "MM/dd/yy")}
+            </time>
+          </Badge>
         </CardFooter>
       </CardContent>
     </Card>
