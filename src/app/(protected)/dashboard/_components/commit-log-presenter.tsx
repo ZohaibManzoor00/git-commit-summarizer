@@ -13,8 +13,6 @@ import {
   User,
   Clock,
   ExternalLink,
-  GitBranch,
-  GitCommitVertical,
   GitCommitHorizontal,
   GitPullRequest,
 } from "lucide-react";
@@ -113,7 +111,7 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-1">
                     {c.commitMessage.startsWith("Merge pull request") ? (
-                      <GitPullRequest className="ml-1 size-4 text-blue-600" />
+                      <GitPullRequest className="ml-1 mr-[1px] size-4 text-blue-600" />
                     ) : (
                       <GitCommitHorizontal className="ml-1 size-4 text-blue-600" />
                     )}
