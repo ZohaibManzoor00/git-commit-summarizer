@@ -8,5 +8,13 @@ export default async function Home() {
 
   // void api.post.getLatest.prefetch();
 
-  return <>HI</>;
+  return (
+    <div className="pl-20 pt-20">
+      <h1>This is still a work in progress.</h1>
+      <div className="flex gap-x-10 pt-5">
+        <Link href="/signin">Sign In</Link>
+        <Link href="/signup">Sign Up</Link>
+      </div>
+    </div>
+  );
 }
