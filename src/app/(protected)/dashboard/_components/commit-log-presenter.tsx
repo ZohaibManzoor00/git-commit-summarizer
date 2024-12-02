@@ -13,6 +13,10 @@ import {
   User,
   Clock,
   ExternalLink,
+  GitBranch,
+  GitCommitVertical,
+  GitCommitHorizontal,
+  GitPullRequest,
 } from "lucide-react";
 import CopySection from "./copy-section";
 import { Badge } from "@/components/ui/badge";
@@ -41,30 +45,7 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
     <div className="space-y-2">
       <div className="space-y-4 px-4 pb-2">
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-          {/* <div className="flex flex-wrap gap-2">
-            <Badge
-              variant="secondary"
-              className="bg-gradient-to-br from-purple-500/10 to-purple-500/5 text-sm"
-            >
-              <Sparkles className="mr-1 size-4 text-purple-500" />
-              {numOfAISummaries} AI summaries
-            </Badge>
-            <Badge
-              variant="secondary"
-              className="bg-gradient-to-br from-green-500/10 to-green-500/5 text-sm"
-            >
-              <Users className="mr-1 size-4 text-green-500" />
-              {numOfAuthors} Contributor{numOfAuthors > 1 ? "s" : ""}
-            </Badge>
-            <Badge
-              variant="secondary"
-              className="bg-gradient-to-br from-blue-500/10 to-blue-500/5 text-sm"
-            >
-              <GitCommit className="mr-1 size-5 text-blue-500" />
-              {totalCommits} Commits
-            </Badge>
-          </div> */}
-           <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2">
             <Badge
               variant="secondary"
               className="bg-purple-500/10 text-sm text-purple-600"
@@ -101,7 +82,7 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
           </Button>
         </div>
       </div>
-      <div className="h-1"/>
+      <div className="h-1" />
       <ul className="h-[calc(100vh-14.2rem)] space-y-4 overflow-y-scroll px-2">
         {commits.map((c, i) => (
           <li key={c.id} className="relative flex gap-x-4 px-2">
@@ -131,9 +112,12 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-1">
-                    <span className="ml-1 font-medium">
-                      {c.commitAuthorName}
-                    </span>
+                    {c.commitMessage.startsWith("Merge pull request") ? (
+                      <GitPullRequest className="ml-1 size-4 text-blue-600" />
+                    ) : (
+                      <GitCommitHorizontal className="ml-1 size-4 text-blue-600" />
+                    )}
+                    <span className="font-medium">{c.commitAuthorName}</span>
                   </div>
                   <CopySection commitHash={c.commitHash} />
                 </div>
@@ -182,4 +166,4 @@ const CommitLogPresenter: FC<CommitLogPresenterProps> = ({
 
 const MemoizedCommitLogPresenter = React.memo(CommitLogPresenter);
 
-export default MemoizedCommitLogPresenter
+export default MemoizedCommitLogPresenter;

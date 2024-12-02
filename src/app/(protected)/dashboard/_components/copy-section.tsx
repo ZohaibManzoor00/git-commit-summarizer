@@ -19,11 +19,12 @@ const CopySection: FC<CopySectionProps> = ({ commitHash }) => {
   return (
     <Badge variant="secondary">
       <code
-        className="relative flex items-center gap-x-1 bg-muted py-1 text-sm hover:cursor-pointer font-medium"
+        className="flex items-center gap-x-1 bg-muted py-[1px] text-sm hover:cursor-pointer font-medium"
         onClick={handleCopy}
         role="button"
       >
-        {commitHash}
+         <span className="sm:hidden">{commitHash.slice(0, 7)}</span>
+         <span className="hidden sm:inline">{commitHash}</span>
         <div className="rounded-sm bg-primary/5 p-1 text-sm ring-1 ring-inset ring-primary/5">
           {status === "clicked" ? (
             <Check className="size-3" />

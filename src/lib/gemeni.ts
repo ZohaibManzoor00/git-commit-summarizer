@@ -5,7 +5,6 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 export const aiSummarizeCommit = async (commitDiff: string) => {
-  // ? https://github.com/docker/genai-stack/commit/<commithash>.dif
   const res = await model.generateContent([
     `You are an expert programmer, and you are trying to summarize a git diff.
 

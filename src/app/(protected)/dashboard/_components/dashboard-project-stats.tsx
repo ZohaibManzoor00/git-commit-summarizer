@@ -27,10 +27,11 @@ import {
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import NumberTicker from "@/components/ui/number-ticker";
 
 const ProjectStats: FC = () => {
   const { projects, setProjectId } = useProject();
-  const { data } = api.project.getDashboardStats.useQuery();
+  const { data, isLoading } = api.project.getDashboardStats.useQuery();
 
   return (
     <div className="mt-6 space-y-2 px-4">
@@ -43,7 +44,13 @@ const ProjectStats: FC = () => {
             <FolderGit2 className="size-4 text-green-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{data?.totalProjects}</div>
+            <p className="text-2xl font-bold">
+              {isLoading ? (
+                "??"
+              ) : (
+                <NumberTicker value={data?.totalProjects ?? 0} />
+              )}
+            </p>
           </CardContent>
         </Card>
         <Card className="hover:bg-muted/50">
@@ -54,7 +61,13 @@ const ProjectStats: FC = () => {
             <GitPullRequest className="size-4 text-blue-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{data?.totalCommits}</div>
+            <p className="text-2xl font-bold">
+              {isLoading ? (
+                "??"
+              ) : (
+                <NumberTicker value={data?.totalCommits ?? 0} />
+              )}
+            </p>
           </CardContent>
         </Card>
         <Card className="hover:bg-muted/50">
@@ -63,9 +76,13 @@ const ProjectStats: FC = () => {
             <Bot className="size-4 text-purple-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {data?.totalCommitsWithSummary}
-            </div>
+            <p className="text-2xl font-bold">
+              {isLoading ? (
+                "??"
+              ) : (
+                <NumberTicker value={data?.totalCommitsWithSummary ?? 0} />
+              )}
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -84,7 +101,7 @@ const ProjectStats: FC = () => {
                 {data?.latestCommits.map((commit, i) => (
                   <div
                     key={commit.id}
-                    className="group flex items-start gap-4 rounded-lg border p-3 hover:bg-muted/50"
+                    className="group flex items-start gap-2 rounded-lg border p-3 hover:bg-muted/50"
                   >
                     <div className="mt-1">
                       {commit.commitMessage.startsWith("Merge pull request") ? (
@@ -93,7 +110,7 @@ const ProjectStats: FC = () => {
                         <GitCommitVertical className="size-4 text-blue-600" />
                       )}
                     </div>
-                    <div className="grid gap-1">
+                    <div className="grid gap-[2px]">
                       <div className="flex max-w-full items-center gap-2 truncate">
                         <span
                           className="cursor-pointer truncate font-medium"
@@ -111,7 +128,7 @@ const ProjectStats: FC = () => {
                           <ExternalLink className="h-3.5 w-3.5" />
                         </a>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground truncate">
+                      <div className="flex items-center gap-1 truncate text-sm text-muted-foreground">
                         <Tooltip>
                           <TooltipTrigger className="hover:underline">
                             {commit.commitHash.substring(0, 7)}
@@ -138,7 +155,7 @@ const ProjectStats: FC = () => {
                           </span>
                         </Badge>
                         <span>•</span>
-                        <span className="font-medium text-foreground">
+                        <span className="text-xs font-medium text-foreground">
                           {commit.commitAuthorName}
                         </span>
                         {commit.commitAuthorAvatar ? (
@@ -177,7 +194,7 @@ const ProjectStats: FC = () => {
           <CommitActivityChart commitsByWeekName={data?.commitsChartData} />
         </Card>
       </div>
-      <div className="h-1" />
+      <div className="h-2" />
       <h2 className="text-2xl font-semibold">Your Projects</h2>
       <div className="h-1" />
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
