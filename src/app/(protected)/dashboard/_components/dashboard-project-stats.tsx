@@ -87,7 +87,7 @@ const ProjectStats: FC = () => {
                     className="group flex items-start gap-4 rounded-lg border p-3 hover:bg-muted/50"
                   >
                     <div className="mt-1">
-                      {i % 2 === 0 ? (
+                      {commit.commitMessage.startsWith("Merge pull request") ? (
                         <GitMerge className="size-4 text-purple-600" />
                       ) : (
                         <GitCommitVertical className="size-4 text-blue-600" />
