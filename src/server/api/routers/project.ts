@@ -53,9 +53,7 @@ export const projectRouter = createTRPCRouter({
   toggleStar: protectedProcedure
     .input(z.object({ projectId: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      const project = await ctx.db.project.findUnique({
-        where: { id: input.projectId },
-      });
+      const project = await ctx.db.project.findUnique({ where: { id: input.projectId } });
 
       if (!project) throw new Error(`Project ${input.projectId} not found.`);
 
@@ -84,7 +82,11 @@ export const projectRouter = createTRPCRouter({
       select: { projectId: true },
     });
 
-    const userProjectIds = userProjects.map((item) => item.projectId);
+    const userProjectIds = userProjects.map((project) => project.projectId);
+
+    const pollCommitsPromises = userProjectIds.map((projectId) => pollCommits(projectId).catch(console.error));
+  
+    await Promise.allSettled(pollCommitsPromises);
 
     const [
       totalCommitsResult,
