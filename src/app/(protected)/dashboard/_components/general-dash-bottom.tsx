@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import Link from "next/link";
-import { Plus, PanelsTopLeft, RefreshCw } from "lucide-react";
+import { Plus, PanelsTopLeft } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
@@ -11,8 +11,6 @@ import SyncDashboardBtn from "./sync-button";
 const DashboardBottom: FC = () => {
   const { projects } = useProject();
   const { user } = useUser();
-
-  // if (projects?.length === 0) return <NoProject />;
 
   return (
     <div className="mx-auto pt-1">
@@ -26,7 +24,6 @@ const DashboardBottom: FC = () => {
           </p>
         </div>
         <div className="flex gap-x-2">
-          {/* {project} */}
          <SyncDashboardBtn />
           <Button asChild>
             <Link href="/create">

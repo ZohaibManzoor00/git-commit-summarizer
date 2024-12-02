@@ -98,10 +98,10 @@ const ProjectStats: FC = () => {
           <CardContent>
             {data?.latestCommits && data?.latestCommits.length > 0 ? (
               <div className="h-60 space-y-4 overflow-y-auto">
-                {data?.latestCommits.map((commit, i) => (
+                {data?.latestCommits.map((commit) => (
                   <div
                     key={commit.id}
-                    className="group flex items-start gap-4 rounded-lg border p-3 hover:bg-muted/50"
+                    className="group flex items-start gap-2 rounded-lg border p-3 hover:bg-muted/50"
                   >
                     <div className="mt-1">
                       {commit.commitMessage.startsWith("Merge pull request") ? (
@@ -110,7 +110,7 @@ const ProjectStats: FC = () => {
                         <GitCommitVertical className="size-4 text-blue-600" />
                       )}
                     </div>
-                    <div className="grid gap-1">
+                    <div className="grid gap-y-[2px]">
                       <div className="flex max-w-full items-center gap-2 truncate">
                         <span
                           className="cursor-pointer truncate font-medium"
@@ -172,12 +172,16 @@ const ProjectStats: FC = () => {
                           </div>
                         )}
                         {/* {commit.additions !== undefined && (
-                    <>
-                      <span>•</span>
-                      <span className="text-green-600">+{commit.additions}</span>
-                      <span className="text-red-600">-{commit.deletions}</span>
-                    </>
-                  )} */}
+                          <>
+                            <span>•</span>
+                            <span className="text-green-600">
+                              +{commit.additions}
+                            </span>
+                            <span className="text-red-600">
+                              -{commit.deletions}
+                            </span>
+                          </>
+                        )} */}
                       </div>
                     </div>
                   </div>
