@@ -21,15 +21,13 @@ const SidebarLayout: FC<Props> = ({ children }) => {
           <div className="h-2" />
 
           <header className="flex h-14 items-center justify-between gap-2 rounded-none p-2 px-4">
-            {/* <Suspense fallback={<Spinner />}> */}
-
-            <Search />
-            {/* </Suspense> */}
+            <Suspense fallback={<Spinner />}>
+              <Search />
+            </Suspense>
             <UserButton />
-
           </header>
           <div className="h-2" />
-          <Separator className=""/>
+          <Separator className="" />
         </Card>
         {/* <div className="h-3" /> */}
         <div className="h-[calc(100vh-4.6rem)] rounded-none shadow">
