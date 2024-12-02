@@ -6,6 +6,7 @@ import { useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import useProject from "@/hooks/use-project";
 import ProjectStats from "./dashboard-project-stats";
+import SyncDashboardBtn from "./sync-button";
 
 const DashboardBottom: FC = () => {
   const { projects } = useProject();
@@ -25,10 +26,7 @@ const DashboardBottom: FC = () => {
           </p>
         </div>
         <div className="flex gap-x-2">
-          <Button variant="outline">
-            <RefreshCw className="h-4 w-4" />
-            Sync
-          </Button>
+         <SyncDashboardBtn />
           <Button asChild>
             <Link href="/create">
               <Plus className="h-4 w-4" />

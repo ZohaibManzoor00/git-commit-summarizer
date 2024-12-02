@@ -1,4 +1,3 @@
-'use client'
 import {
   Card,
   CardHeader,
@@ -8,13 +7,9 @@ import {
 } from "@/components/ui/card";
 import useProject from "@/hooks/use-project";
 import {
-  Plus,
-  GitCommit,
-  WandSparkles,
   GitMerge,
   ExternalLink,
   User,
-  FolderKanban,
   GitPullRequest,
   Bot,
   GitCommitVertical,

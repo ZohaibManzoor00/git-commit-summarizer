@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { CardDescription, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-
 const DashboardTop: FC = () => {
   const { user } = useUser();
 
