@@ -39,10 +39,10 @@ export default function AppSidebar() {
     >
       <Card className="border-r-1 h-full rounded-none shadow-none">
         <SidebarHeader className="ml-[.4rem]">
-          <Link href="/" className="mt-3 flex items-center gap-2">
-            <GitBranch className="h-6 w-6" />
+          <Link href="/" className="mt-3 flex items-center gap-1">
+            <GitBranch className="h-5 w-5" />
             {open ? (
-              <h1 className="text-xl font-semibold">Git Interact</h1>
+              <h1 className="text-lg font-semibold">Git Interact</h1>
             ) : null}
           </Link>
         </SidebarHeader>
