@@ -1,29 +1,34 @@
-# Create T3 App
+# Git Interact - Talk to your repos, powered by AI.
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+> Fullstack Retrieval-Augmented Generation (RAG) application using LangChain, GitHub, and Gemini’s LLM to automatically summarize git diffs, enabling faster and more accurate code reviews that boosted team productivity.
 
-## What's next? How do I make an app with this?
+Project View
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+<img width="1434" alt="Screenshot 2025-01-13 at 12 14 15 PM" src="https://github.com/user-attachments/assets/92d8dbe9-360d-4797-a127-cc9561231a32" />
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+Dashboard View
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+<img width="1434" alt="Screenshot 2025-01-13 at 12 15 02 PM" src="https://github.com/user-attachments/assets/8bfb7958-121f-4a3a-90ab-e3ae19f2c833" />
 
-## Learn More
+Table View
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+<img width="913" alt="Screenshot 2025-01-13 at 12 15 46 PM" src="https://github.com/user-attachments/assets/b13f1af6-8310-462c-bfe3-b1f862b18022" />
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+Mobile View
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+<img width="629" alt="Screenshot 2025-01-13 at 12 38 24 PM" src="https://github.com/user-attachments/assets/4c343136-0de0-4941-9140-9bb858be74be" />
 
-## How do I deploy this?
+Landing View
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+<img width="1434" alt="Screenshot 2025-01-13 at 12 12 00 PM" src="https://github.com/user-attachments/assets/27d3639f-2b05-4a69-a01a-c185df00d87a" />
+
+
+Technologies Used: 
+  - [T3 Stack](https://create.t3.gg/)
+  - Typescript
+  - Next.js
+  - Prisma
+  - Supabase(Postgres)
+  - Langchain
+  - Github
+  - Gemini LLM
